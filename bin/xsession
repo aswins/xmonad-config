@@ -7,6 +7,8 @@
 # Configure PATH so that we can access our scripts below
 PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
 
+setxkbmap -option caps:escape
+
 # Configure X
 xsetroot -cursor_name left_ptr &
 xrdb -merge ~/.Xdefaults &
