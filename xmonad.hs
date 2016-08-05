@@ -19,6 +19,7 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
+import Graphics.X11.ExtraTypes.XF86
 
 
 ------------------------------------------------------------------------
@@ -41,13 +42,6 @@ myScreenshot = "screenshot"
 -- The command to use as a launcher, to launch commands that don't have
 -- preset keybindings.
 myLauncher = "$(yeganesh -x -- -fn '-*-terminus-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -nb '#000000' -nf '#FFFFFF' -sb '#7C7C7C' -sf '#CEFFAC')"
-
--- The command for system tray
-myTray = "trayer --edge top --align right --widthtype pixel --width 100 --SetDockType true --SetPartialStrut true --transparent true --alpha 0 --tint 0x000000 --expand true --heighttype pixel --height 16"
-
-imClient = "Telegram -startintray"
-
-startupCommands = [imClient, "google-chrome"]
 
 ------------------------------------------------------------------------
 -- Workspaces
@@ -156,14 +150,14 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- Mute volume.
   , ((modMask .|. controlMask, xK_m),
-     spawn "amixer -q set Master toggle")
+     spawn "amixer -D pulse set Master toggle")
 
   -- Decrease volume.
-  , ((modMask .|. controlMask, xK_j),
+  , ((0, xF86XK_AudioLowerVolume),
      spawn "amixer -q set Master 10%-")
 
   -- Increase volume.
-  , ((modMask .|. controlMask, xK_k),
+  , ((0, xF86XK_AudioRaiseVolume),
      spawn "amixer -q set Master 10%+")
 
   -- Audio previous.
