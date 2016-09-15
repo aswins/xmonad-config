@@ -42,7 +42,7 @@ myScreenshot = "screenshot"
 
 -- The command to use as a launcher, to launch commands that don't have
 -- preset keybindings.
-myLauncher = "rofi -show run -lines 6 -eh 2 -width 100 -padding 200 -opacity '85' -bw 0 -bc '#2f343f' -bg '#2f343f' -fg '#f3f4f5' -hlbg '#2f343f' -hlfg '#9575cd' -font 'System San Francisco Display 18'"
+myLauncher = "rofi -show run"
 
 startPomodoro = "echo 25 15 > ~/.pomodoro_session"
 stopPomodoro = "rm -f ~/.pomodoro_session"
