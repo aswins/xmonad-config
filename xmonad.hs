@@ -20,6 +20,7 @@ import XMonad.Util.EZConfig(additionalKeys)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import Graphics.X11.ExtraTypes.XF86
+import XMonad.Util.Scratchpad
 
 
 ------------------------------------------------------------------------
@@ -67,7 +68,7 @@ myWorkspaces = ["1:term","2:web","3:media","4:chat","5:doc"] ++ map show [6..9]
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll
+myManageHook' = composeAll
     [ className =? "Chromium"       --> doShift "2:web"
     , className =? "google-chrome"  --> doShift "2:web"
     , resource  =? "desktop_window" --> doIgnore
@@ -80,6 +81,17 @@ myManageHook = composeAll
     , className =? "Xchat"          --> doShift "5:media"
     , className =? "stalonetray"    --> doIgnore
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
+
+manageScratchPad :: ManageHook
+manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
+  where
+    h = 0.3     -- terminal height, 10%
+    w = 1       -- terminal width, 100%
+    t = 1 - h   -- distance from top edge, 90%
+    l = 1 - w   -- distance from left edge, 0%
+
+myManageHook = myManageHook' <+> manageScratchPad
+scratchPad = scratchpadSpawnActionTerminal "rxvt-unicode"
 
 
 ------------------------------------------------------------------------
@@ -265,6 +277,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- Stop a pomodoro
   , ((modMask .|. controlMask .|. shiftMask, xK_n),
      spawn stopPomodoro)
+
+  -- scratchpad
+  , ((modMask .|. shiftMask, xK_n),
+     scratchPad)
 
   ]
   ++
