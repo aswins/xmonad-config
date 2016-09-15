@@ -43,6 +43,9 @@ myScreenshot = "screenshot"
 -- preset keybindings.
 myLauncher = "$(yeganesh -x -- -fn '-*-terminus-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -nb '#000000' -nf '#FFFFFF' -sb '#7C7C7C' -sf '#CEFFAC')"
 
+startPomodoro = "echo 25 15 > ~/.pomodoro_session"
+stopPomodoro = "rm -f ~/.pomodoro_session"
+
 ------------------------------------------------------------------------
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
@@ -254,6 +257,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- Restart xmonad.
   , ((modMask, xK_q),
      restart "xmonad" True)
+
+  -- Start a pomodoro
+  , ((modMask .|. shiftMask, xK_n),
+     spawn startPomodoro)
+
+  -- Stop a pomodoro
+  , ((modMask .|. controlMask .|. shiftMask, xK_n),
+     spawn stopPomodoro)
+
   ]
   ++
 
