@@ -42,7 +42,7 @@ myScreenshot = "screenshot"
 
 -- The command to use as a launcher, to launch commands that don't have
 -- preset keybindings.
-myLauncher = "rofi -show run"
+myLauncher = "rofi -show run -lines 6  -opacity '80' -bc blue"
 
 startPomodoro = "echo 25 15 > ~/.pomodoro_session"
 stopPomodoro = "rm -f ~/.pomodoro_session"
@@ -107,7 +107,8 @@ scratchPad = scratchpadSpawnActionTerminal "rxvt-unicode"
 myLayout = spacing 2 $ avoidStruts (
     Tall 1 (3/100) (1/2) |||
     Mirror (Tall 1 (3/100) (1/2)) |||
-    Full)
+    noBorders(fullscreenFull Full)
+    )
 
 
 ------------------------------------------------------------------------
@@ -155,13 +156,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask, xK_p),
      spawn myLauncher)
 
-  -- Take a selective screenshot using the command specified by mySelectScreenshot.
-  , ((modMask .|. shiftMask, xK_p),
-     spawn mySelectScreenshot)
+  {--- Take a selective screenshot using the command specified by mySelectScreenshot.-}
+  {-, ((modMask .|. shiftMask, xK_p),-}
+     {-spawn mySelectScreenshot)-}
 
-  -- Take a full screenshot using the command specified by myScreenshot.
-  , ((modMask .|. controlMask .|. shiftMask, xK_p),
-     spawn myScreenshot)
+  {--- Take a full screenshot using the command specified by myScreenshot.-}
+  {-, ((modMask .|. controlMask .|. shiftMask, xK_p),-}
+     {-spawn myScreenshot)-}
 
   -- Mute volume.
   , ((modMask .|. controlMask, xK_m),
@@ -271,11 +272,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
      restart "xmonad" True)
 
   -- Start a pomodoro
-  , ((modMask .|. shiftMask, xK_n),
+  , ((modMask .|. shiftMask, xK_p),
      spawn startPomodoro)
 
   -- Stop a pomodoro
-  , ((modMask .|. controlMask .|. shiftMask, xK_n),
+  , ((modMask .|. controlMask .|. shiftMask, xK_p),
      spawn stopPomodoro)
 
   -- scratchpad
