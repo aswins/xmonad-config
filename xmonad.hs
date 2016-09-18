@@ -31,7 +31,7 @@ import XMonad.Util.Scratchpad
 myTerminal = "terminator"
 
 -- The command to lock the screen or show the screensaver.
-myScreensaver = "/usr/bin/gnome-screensaver-command --lock"
+myScreensaver = "~/.xmonad/lock.sh ~/.xmonad/lock.png"
 
 -- The command to take a selective screenshot, where you select
 -- what you'd like to capture on the screen.
