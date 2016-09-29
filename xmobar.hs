@@ -3,6 +3,7 @@
 
 Config {
     font = "xft:Fixed-8",
+    additionalFonts = ["xft:FontAwesome-8"],
     bgColor = "#002b36",
     fgColor = "#93a1a1",
     position = Static { xpos = 0, ypos = 0, width = 1820, height = 16 },
@@ -14,10 +15,11 @@ Config {
         Run Network "wlp7s0" ["-t","Net: <rx>, <tx>","-H","200","-L","10","-h","#FFB6B0","-l","#CEFFAC","-n","#FFFFCC"] 10,
         Run Date "%a %b %_d %l:%M" "date" 10,
         Run Com "/home/aswin/bin/volume.sh" [] "myVolume" 10,
+        Run Com "/home/aswin/bin/current_track.sh" [] "current_track" 10,
         Run CommandReader "/home/aswin/projects/python/pymodoro/pymodoro.py" "pomodoro",
         Run StdinReader
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%StdinReader% }{ %pomodoro%  %multicpu%   %memory%   %swap%  Vol: %myVolume% %wlp7s0%   <fc=#FFFFCC>%date% </fc>"
+    template = "%StdinReader% }<fn=1> </fn> %current_track% {%pomodoro%  %multicpu%   %memory%   %swap%  Vol: %myVolume% %wlp7s0%   <fc=#FFFFCC>%date% </fc>"
 }
