@@ -28,7 +28,7 @@ import XMonad.Util.Scratchpad
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal = "terminator"
+myTerminal = "urxvt"
 
 -- The command to lock the screen or show the screensaver.
 myScreensaver = "~/.xmonad/lock.sh ~/.xmonad/lock.png"
