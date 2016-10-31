@@ -178,15 +178,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- Audio previous.
   , ((0, 0x1008FF16),
-     spawn "")
+     spawn "mpc prev")
 
   -- Play/pause.
   , ((0, 0x1008FF14),
-     spawn "")
+     spawn "mpc toggle")
 
   -- Audio next.
   , ((0, 0x1008FF17),
-     spawn "")
+     spawn "mpc next")
 
   -- Eject CD tray.
   , ((0, 0x1008FF2C),
