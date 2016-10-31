@@ -21,5 +21,5 @@ Config {
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%StdinReader% }<fn=1> </fn> %current_track% {%pomodoro%  %multicpu%   %memory%   %swap%  Vol: %myVolume% %wlp7s0%   <fc=#FFFFCC>%date% </fc>"
+    template = "%StdinReader% } <fn=1> <fc=#ee9a00> </fc></fn> <fc=#ee9a00> %current_track% </fc> {%pomodoro%  %multicpu%   %memory%   %swap%  Vol: %myVolume% %wlp7s0%   <fc=#FFFFCC>%date% </fc>"
 }
