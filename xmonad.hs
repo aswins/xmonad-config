@@ -80,7 +80,7 @@ myManageHook' = composeAll
     , className =? "VirtualBox"     --> doShift "4:vm"
     , className =? "Xchat"          --> doShift "5:media"
     , className =? "stalonetray"    --> doIgnore
-    , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
+    ,isFullscreen                   --> doFullFloat]
 
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
@@ -91,7 +91,7 @@ manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
     l = 1 - w   -- distance from left edge, 0%
 
 myManageHook = myManageHook' <+> manageScratchPad
-scratchPad = scratchpadSpawnActionTerminal "rxvt-unicode"
+scratchPad = scratchpadSpawnActionTerminal "urxvt"
 
 
 ------------------------------------------------------------------------
@@ -166,15 +166,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- Mute volume.
   , ((modMask .|. controlMask, xK_m),
-     spawn "amixer -D pulse set Master toggle")
+     spawn "pamixer -m")
 
   -- Decrease volume.
   , ((0, xF86XK_AudioLowerVolume),
-     spawn "amixer -q set Master 10%-")
+     spawn "pamixer -d 10")
 
   -- Increase volume.
   , ((0, xF86XK_AudioRaiseVolume),
-     spawn "amixer -q set Master 10%+")
+     spawn "pamixer -i 10")
 
   -- Audio previous.
   , ((0, 0x1008FF16),
