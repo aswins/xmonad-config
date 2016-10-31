@@ -2,7 +2,7 @@
 -- instance to the extreme right
 
 Config {
-    font = "xft:Fixed-8",
+    font = "xft:Meslo LG S DZ for Powerline-9",
     additionalFonts = ["xft:FontAwesome-8"],
     bgColor = "#002b36",
     fgColor = "#93a1a1",
