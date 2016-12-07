@@ -14,4 +14,7 @@ trayer --edge top --align right --widthtype pixel --width 100 --SetDockType true
 compton &
 
 # set wallpaper
-feh --bg-fill ~/Downloads/solarized.jpg
+feh --bg-fill ~/Downloads/dracula.png
+
+# Cursor will no longer be an x
+xsetroot -cursor_name left_ptr

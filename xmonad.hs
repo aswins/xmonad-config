@@ -69,10 +69,11 @@ myWorkspaces = ["1:term","2:web","3:media","4:chat","5:doc"] ++ map show [6..9]
 -- 'className' and 'resource' are used below.
 --
 myManageHook' = composeAll
-    [ className =? "Chromium"       --> doShift "2:web"
+    [ className =? "Google-chrome"  --> doShift "2:web"
     , className =? "google-chrome"  --> doShift "2:web"
     , resource  =? "desktop_window" --> doIgnore
     , className =? "Galculator"     --> doFloat
+    , className =? "hl2_linux"      --> doFullFloat
     , className =? "Steam"          --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "gpicview"       --> doFloat
@@ -160,9 +161,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   {-, ((modMask .|. shiftMask, xK_p),-}
      {-spawn mySelectScreenshot)-}
 
-  {--- Take a full screenshot using the command specified by myScreenshot.-}
-  {-, ((modMask .|. controlMask .|. shiftMask, xK_p),-}
-     {-spawn myScreenshot)-}
+  -- Take a full screenshot using the command specified by myScreenshot.
+  , ((modMask .|. controlMask .|. shiftMask, xK_s),
+     spawn myScreenshot)
 
   -- Mute volume.
   , ((modMask .|. controlMask, xK_m),
