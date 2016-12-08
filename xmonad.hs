@@ -21,6 +21,8 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Util.Scratchpad
+import XMonad.Hooks.EwmhDesktops
+import qualified XMonad.Hooks.EwmhDesktops as F
 
 
 ------------------------------------------------------------------------
@@ -74,6 +76,7 @@ myManageHook' = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , className =? "Galculator"     --> doFloat
     , className =? "hl2_linux"      --> doFullFloat
+    , className =? "pyrogenesis"    --> doFullFloat
     , className =? "Steam"          --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "gpicview"       --> doFloat
@@ -391,5 +394,6 @@ defaults = defaultConfig {
     -- hooks, layouts
     layoutHook         = smartBorders $ myLayout,
     manageHook         = myManageHook,
-    startupHook        = myStartupHook
+    startupHook        = myStartupHook,
+    handleEventHook    = F.fullscreenEventHook
 }
