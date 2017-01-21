@@ -77,6 +77,10 @@ myManageHook' = composeAll
     , className =? "Galculator"     --> doFloat
     , className =? "hl2_linux"      --> doFullFloat
     , className =? "pyrogenesis"    --> doFullFloat
+    , className =? "StardewValley.bin.x86_64"    --> doFullFloat
+    , className =? "limbo"          --> doFullFloat
+    , className =? "Minecraft 1.11.2" --> doFullFloat
+    , className =? "GridAutosport"  --> doFullFloat
     , className =? "Steam"          --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "gpicview"       --> doFloat
@@ -396,4 +400,5 @@ defaults = defaultConfig {
     manageHook         = myManageHook,
     startupHook        = myStartupHook,
     handleEventHook    = F.fullscreenEventHook
+
 }
