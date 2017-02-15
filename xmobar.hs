@@ -58,6 +58,13 @@ Config {
             , "-n", "#6c71c4" -- violet
             , "-h", "#6c71c4" -- violet
             ] 100,
+        Run Volume "default" "Master"
+            [ "-t", "<status>", "--"
+            , "--on", "<fc=#859900><fn=1>\xf028</fn> <volume>%</fc>"
+            , "--onc", "#859900"
+            , "--off", "<fc=#dc322f><fn=1>\xf026</fn> MUTE</fc>"
+            , "--offc", "#dc322f"
+            ] 1,
         Run Network "wlp4s0" ["-t","<rx>, <tx>",
             "-H","200",
             "-L","10",
@@ -65,10 +72,9 @@ Config {
             "-l","#CEFFAC",
             "-n","#FFFFCC"] 10,
         Run Date "<fc=#268bd2><fn=1>\xf073</fn> %a %_d %b </fc><fc=#2AA198><fn=1></fn> %H:%M</fc>" "date" 10,
-        Run Com "/home/aswin/bin/volume.sh" [] "myVolume" 10,
         Run StdinReader
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%StdinReader% } { %multicpu%   %memory%   %swap%   %battery% Vol: %myVolume%  %wlp4s0wi% %wlp4s0%  <fc=#FFFFCC>%date% </fc>"
+    template = "%StdinReader% } { %multicpu%   %memory%   %swap%   %battery%  %wlp4s0wi% %wlp4s0% %default:Master%  <fc=#FFFFCC>%date% </fc>"
 }
