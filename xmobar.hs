@@ -34,10 +34,11 @@ Config {
             , "--off-icon-pattern", "<fn=1>\xf1e6</fn>"
             , "--on-icon-pattern", "<fn=1>\xf1e6</fn>"
             ] 10,
-        Run Memory ["-t","Mem: <usedratio>%",
-            "-H","8192",
-            "-L","4096",
-            "-h","#FFB6B0",
+        Run Memory ["-t","M:<usedvbar>",
+            "-p", "2",
+            "-H","4096",
+            "-L","2048",
+            "-h","#dc322f",
             "-l","#CEFFAC",
             "-n","#FFFFCC"] 10,
         Run Swap ["-t","Swap: <usedratio>%",
