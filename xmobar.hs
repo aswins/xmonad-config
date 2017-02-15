@@ -18,12 +18,21 @@ Config {
             "-n","#FFFFCC",
             "-w","3"] 10,
         Run BatteryP ["BAT0", "BAT1"] [
-            "-t", "<acstatus>: <left>% - <timeleft>",
-            "--",
-            "-O", "AC",
-            "-O", "Bat",
-            "-h", "green",
-            "-l", "red"
+            "-t", "<fc=#b58900><acstatus></fc>"
+            , "-L", "20"
+            , "-H", "85"
+            , "-l", "#dc322f"
+            , "-n", "#b58900"
+            , "-h", "#b58900"
+            , "--" -- battery specific options
+            -- discharging status
+            , "-o"  , "<fn=1>\xf242</fn> <left>% (<timeleft>)"
+            -- AC "on" status
+            , "-O"  , "<fn=1>\xf1e6</fn> <left>%"
+            -- charged status
+            , "-i"  , "<fn=1>\xf1e6</fn> <left>%"
+            , "--off-icon-pattern", "<fn=1>\xf1e6</fn>"
+            , "--on-icon-pattern", "<fn=1>\xf1e6</fn>"
             ] 10,
         Run Memory ["-t","Mem: <usedratio>%",
             "-H","8192",
