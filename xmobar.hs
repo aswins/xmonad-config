@@ -43,7 +43,7 @@ Config {
             "-h","#FFB6B0",
             "-l","#CEFFAC",
             "-n","#FFFFCC"] 10,
-        Run Date "%a %b %_d %l:%M" "date" 10,
+        Run Date "<fc=#268bd2><fn=1>\xf073</fn> %a %_d %b </fc><fc=#2AA198><fn=1></fn> %H:%M</fc>" "date" 10,
         Run Com "/home/aswin/bin/volume.sh" [] "myVolume" 10,
         Run StdinReader
     ],
