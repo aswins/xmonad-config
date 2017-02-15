@@ -10,7 +10,7 @@ Config {
     lowerOnStart = False,
     commands = [
         Run MultiCpu [
-            "-t", "Cpu: <total0> <total1> <total2> <total3>",
+            "-t", "Cpu: <total>",
             "-L","30",
             "-H","60",
             "-h","#FFB6B0",
@@ -34,7 +34,7 @@ Config {
             , "--off-icon-pattern", "<fn=1>\xf1e6</fn>"
             , "--on-icon-pattern", "<fn=1>\xf1e6</fn>"
             ] 10,
-        Run Memory ["-t","M:<usedvbar>",
+        Run Memory ["-t","<usedvbar>",
             "-p", "2",
             "-H","4096",
             "-L","2048",
@@ -47,7 +47,18 @@ Config {
             "-h","#FFB6B0",
             "-l","#CEFFAC",
             "-n","#FFFFCC"] 10,
-        Run Network "wlp4s0" ["-t","Net: <rx>, <tx>",
+        Run Wireless "wlp4s0"
+            [ "-a", "l"
+            , "-x", "-"
+            , "-t", "<fc=#6c71c4><fn=1>\xf1eb</fn><quality></fc>"
+            , "-L", "50"
+            , "-H", "75"
+            -- , "-l", "#dc322f" -- red
+            , "-l", "#6c71c4" -- violet
+            , "-n", "#6c71c4" -- violet
+            , "-h", "#6c71c4" -- violet
+            ] 100,
+        Run Network "wlp4s0" ["-t","<rx>, <tx>",
             "-H","200",
             "-L","10",
             "-h","#FFB6B0",
@@ -59,5 +70,5 @@ Config {
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%StdinReader% } { %multicpu%   %memory%   %swap%   %battery% Vol: %myVolume%  %wlp4s0%   <fc=#FFFFCC>%date% </fc>"
+    template = "%StdinReader% } { %multicpu%   %memory%   %swap%   %battery% Vol: %myVolume%  %wlp4s0wi% %wlp4s0%  <fc=#FFFFCC>%date% </fc>"
 }
