@@ -4,8 +4,8 @@
 Config {
     font = "xft:Meslo LG S DZ for Powerline-9",
     additionalFonts = ["xft:FontAwesome-8"],
-    bgColor = "#282828",
-    fgColor = "#ebdbb2",
+    bgColor = "#002b36",
+    fgColor = "#657b83",
     position = TopW L 92,
     lowerOnStart = False,
     commands = [
