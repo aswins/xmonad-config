@@ -10,10 +10,10 @@ Config {
     lowerOnStart = False,
     commands = [
         Run MultiCpu [
-            "-t", "Cpu: <total>",
+            "-t", "<icon=/home/aswin/.xmonad/icons/cpu.xbm/> <total>",
             "-L","30",
             "-H","60",
-            "-h","#FFB6B0",
+            "-h","#dc322f",
             "-l","#CEFFAC",
             "-n","#FFFFCC",
             "-w","3"] 10,
@@ -34,7 +34,7 @@ Config {
             , "--off-icon-pattern", "<fn=1>\xf1e6</fn>"
             , "--on-icon-pattern", "<fn=1>\xf1e6</fn>"
             ] 10,
-        Run Memory ["-t","<usedvbar>",
+        Run Memory ["-t","<icon=/home/aswin/.xmonad/icons/mem.xbm/> <usedratio>",
             "-p", "2",
             "-H","4096",
             "-L","2048",
@@ -65,16 +65,16 @@ Config {
             , "--off", "<fc=#dc322f><fn=1>\xf026</fn> MUTE</fc>"
             , "--offc", "#dc322f"
             ] 1,
-        Run Network "wlp4s0" ["-t","<rx>, <tx>",
-            "-H","200",
-            "-L","10",
-            "-h","#FFB6B0",
-            "-l","#CEFFAC",
-            "-n","#FFFFCC"] 10,
+        Run Network "wlp4s0" ["-t","<fn=1>\xf063</fn> <rx> <fn=1>\xf062</fn> <tx>",
+            "-H","1000",
+            "-L","100",
+            "-h","red",
+            "-l","green",
+            "-n","blue"] 10,
         Run Date "<fc=#268bd2><fn=1>\xf073</fn> %a %_d %b </fc><fc=#2AA198><fn=1></fn> %H:%M</fc>" "date" 10,
         Run StdinReader
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%StdinReader% } { %multicpu%   %memory%   %swap%   %battery%  %wlp4s0wi% %wlp4s0% %default:Master%  <fc=#FFFFCC>%date% </fc>"
+    template = "%StdinReader% } { %multicpu%   %memory%   %swap%  <action=`/home/aswin/.xmonad/bin/display-battery` button=1> %battery% </action> %wlp4s0wi% %wlp4s0% %default:Master%  <fc=#FFFFCC>%date% </fc>"
 }
