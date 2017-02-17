@@ -49,11 +49,13 @@ myLauncher = "rofi -show run -lines 6  -opacity '80' -bc blue"
 startPomodoro = "echo 25 15 > ~/.pomodoro_session"
 stopPomodoro = "rm -f ~/.pomodoro_session"
 
+toggleDisplay = "bash /home/aswin/bin/toggle_display.sh"
+
 ------------------------------------------------------------------------
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = ["1:term","2:web","3:media","4:chat","5:doc"] ++ map show [6..9]
+myWorkspaces = ["1:term","2:web","3:chat","4:ide","5:doc"] ++ map show [6..9]
 
 
 ------------------------------------------------------------------------
@@ -73,9 +75,11 @@ myWorkspaces = ["1:term","2:web","3:media","4:chat","5:doc"] ++ map show [6..9]
 myManageHook' = composeAll
     [ className =? "Google-chrome"  --> doShift "2:web"
     , className =? "google-chrome"  --> doShift "2:web"
+    , className =? "Slack"          --> doShift "3:chat"
     , resource  =? "desktop_window" --> doIgnore
     , className =? "Galculator"     --> doFloat
     , className =? "hl2_linux"      --> doFullFloat
+    , className =? "Minecraft 1.11.2"      --> doFullFloat
     , className =? "pyrogenesis"    --> doFullFloat
     , className =? "Steam"          --> doFloat
     , className =? "Gimp"           --> doFloat
@@ -166,11 +170,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- Take a full screenshot using the command specified by myScreenshot.
   , ((modMask .|. controlMask .|. shiftMask, xK_s),
-     spawn myScreenshot)
+     spawn "scrot -s")
 
   -- Mute volume.
   , ((modMask .|. controlMask, xK_m),
-     spawn "pamixer -m")
+     spawn "pamixer -t")
 
   -- Decrease volume.
   , ((0, xF86XK_AudioLowerVolume),
@@ -286,6 +290,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- scratchpad
   , ((modMask .|. shiftMask, xK_n),
      scratchPad)
+
+  -- Toggle display in thinkpad
+  , ((modMask .|. shiftMask, xK_d),
+     spawn toggleDisplay)
 
   ]
   ++
