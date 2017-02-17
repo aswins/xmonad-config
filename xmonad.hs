@@ -93,9 +93,9 @@ myManageHook' = composeAll
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
   where
-    h = 0.3     -- terminal height, 10%
+    h = 0.3     -- terminal height, 30%
     w = 1       -- terminal width, 100%
-    t = 1 - h   -- distance from top edge, 90%
+    t = 1 - h   -- distance from top edge, 70%
     l = 1 - w   -- distance from left edge, 0%
 
 myManageHook = myManageHook' <+> manageScratchPad
@@ -367,7 +367,7 @@ main = do
   xmonad $ defaults {
       logHook = dynamicLogWithPP $ xmobarPP {
             ppOutput = hPutStrLn xmproc
-          , ppTitle = xmobarColor xmobarTitleColor "" . shorten 100
+          , ppTitle = xmobarColor xmobarTitleColor "" . shorten 50
           , ppCurrent = xmobarColor xmobarCurrentWorkspaceColor ""
           , ppLayout = (\str -> "")
           , ppSep = "  |  "
@@ -403,5 +403,5 @@ defaults = defaultConfig {
     layoutHook         = smartBorders $ myLayout,
     manageHook         = myManageHook,
     startupHook        = myStartupHook,
-    handleEventHook    = F.fullscreenEventHook
+    handleEventHook    = docksEventHook <+> F.fullscreenEventHook
 }
