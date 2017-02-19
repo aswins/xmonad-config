@@ -4,13 +4,12 @@
 Config {
     font = "xft:Meslo LG S DZ for Powerline-9",
     additionalFonts = ["xft:FontAwesome-8"],
-    bgColor = "#002b36",
-    fgColor = "#657b83",
-    position = TopW L 92,
+    bgColor = "#282a36",
+    fgColor = "#f8f8f2",
+    position = Static { xpos = 0, ypos = 0, width = 1820, height = 16 },
     lowerOnStart = False,
     overrideRedirect = True,
     allDesktops = True,
-    alpha = 100,
     commands = [
         Run MultiCpu [
             "-t", "<icon=/home/aswin/.xmonad/icons/cpu.xbm/> <total>",
@@ -20,24 +19,7 @@ Config {
             "-l","#CEFFAC",
             "-n","#FFFFCC",
             "-w","3"] 10,
-        Run BatteryP ["BAT0", "BAT1"] [
-            "-t", "<fc=#b58900><acstatus></fc>"
-            , "-L", "20"
-            , "-H", "85"
-            , "-l", "#dc322f"
-            , "-n", "#b58900"
-            , "-h", "#b58900"
-            , "--" -- battery specific options
-            -- discharging status
-            , "-o"  , "<fn=1>\xf242</fn> <left>% (<timeleft>)"
-            -- AC "on" status
-            , "-O"  , "<fn=1>\xf1e6</fn> <left>%"
-            -- charged status
-            , "-i"  , "<fn=1>\xf1e6</fn> <left>%"
-            , "--off-icon-pattern", "<fn=1>\xf1e6</fn>"
-            , "--on-icon-pattern", "<fn=1>\xf1e6</fn>"
-            ] 10,
-        Run Memory ["-t","<icon=/home/aswin/.xmonad/icons/mem.xbm/> <usedratio>",
+        Run Memory ["-t","Mem: <usedratio>",
             "-p", "2",
             "-H","4096",
             "-L","2048",
@@ -50,7 +32,7 @@ Config {
             "-h","#FFB6B0",
             "-l","#CEFFAC",
             "-n","#FFFFCC"] 10,
-        Run Wireless "wlp4s0"
+        Run Wireless "wlp7s0"
             [ "-a", "l"
             , "-x", "-"
             , "-t", "<fc=#6c71c4><fn=1>\xf1eb</fn><quality></fc>"
@@ -68,7 +50,7 @@ Config {
             , "--off", "<fc=#dc322f><fn=1>\xf026</fn> MUTE</fc>"
             , "--offc", "#dc322f"
             ] 1,
-        Run Network "wlp4s0" ["-t","<fn=1>\xf063</fn> <rx> <fn=1>\xf062</fn> <tx>",
+        Run Network "wlp7s0" ["-t","<fn=1>\xf063</fn> <rx> <fn=1>\xf062</fn> <tx>",
             "-H","1000",
             "-L","100",
             "-h","red",
@@ -79,5 +61,5 @@ Config {
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%StdinReader% } { %multicpu%   %memory%   %swap%  <action=`/home/aswin/.xmonad/bin/display-battery` button=1> %battery% </action> %wlp4s0wi% %wlp4s0% %default:Master%  <fc=#FFFFCC>%date% </fc>"
+    template = "%StdinReader% } { %multicpu%   %memory%   %swap%  %wlp7s0wi% %wlp7s0% %default:Master%  <fc=#FFFFCC>%date% </fc>"
 }
