@@ -11,8 +11,10 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
+import XMonad.Layout.Accordion
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
+import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
@@ -127,11 +129,11 @@ projects =
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = spacing 2 $ avoidStruts (
-    Tall 1 (3/100) (1/2) |||
+myLayout = spacing 2 $ avoidStruts $
+    onWorkspace "1:term" (Accordion) (
+    Tall 1 (3/100) (1/2)) |||
     Mirror (Tall 1 (3/100) (1/2)) |||
     noBorders(fullscreenFull Full)
-    )
 
 
 ------------------------------------------------------------------------
