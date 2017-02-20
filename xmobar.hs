@@ -7,12 +7,12 @@ Config {
     bgColor = "#002b36",
     fgColor = "#657b83",
     position = TopW L 92,
-    lowerOnStart = True,
+    lowerOnStart = False,
     overrideRedirect = False,
     allDesktops = True,
     commands = [
         Run MultiCpu [
-            "-t", "<icon=/home/aswin/.xmonad/icons/cpu.xbm/> <total>",
+            "-t", "<icon=/home/aswin/.xmonad/icons/cpu.xbm/> <total1> <total2> <total3> <total0>",
             "-L","30",
             "-H","60",
             "-h","#dc322f",
@@ -35,7 +35,7 @@ Config {
             , "-i"  , "<fn=1>\xf1e6</fn> <left>%"
             , "--off-icon-pattern", "<fn=1>\xf1e6</fn>"
             , "--on-icon-pattern", "<fn=1>\xf1e6</fn>"
-            ] 10,
+            ] 1000,
         Run Memory ["-t","<icon=/home/aswin/.xmonad/icons/mem.xbm/> <usedratio>",
             "-p", "2",
             "-H","4096",
