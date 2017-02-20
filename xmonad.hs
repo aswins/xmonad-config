@@ -5,6 +5,7 @@
 import System.IO
 import System.Exit
 import XMonad
+import XMonad.Actions.CopyWindow            -- like cylons, except x windows
 import XMonad.Actions.DynamicProjects
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -24,6 +25,10 @@ import Graphics.X11.ExtraTypes.XF86
 import XMonad.Util.Scratchpad
 import XMonad.Hooks.EwmhDesktops
 import qualified XMonad.Hooks.EwmhDesktops as F
+
+toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
+                [] -> windows copyToAll
+                _ -> killAllOtherCopies
 
 
 ------------------------------------------------------------------------
@@ -310,6 +315,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- Toggle display in thinkpad
   , ((modMask .|. shiftMask, xK_d),
      spawn toggleDisplay)
+
+  -- Toggle display in thinkpad
+  , ((modMask , xK_c),
+     toggleCopyToAll)
 
   ]
   ++
