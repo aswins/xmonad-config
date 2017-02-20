@@ -7,10 +7,9 @@ Config {
     bgColor = "#002b36",
     fgColor = "#657b83",
     position = TopW L 92,
-    lowerOnStart = False,
-    overrideRedirect = True,
+    lowerOnStart = True,
+    overrideRedirect = False,
     allDesktops = True,
-    alpha = 100,
     commands = [
         Run MultiCpu [
             "-t", "<icon=/home/aswin/.xmonad/icons/cpu.xbm/> <total>",
