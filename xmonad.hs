@@ -5,6 +5,7 @@
 import System.IO
 import System.Exit
 import XMonad
+import XMonad.Actions.DynamicProjects
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -101,6 +102,15 @@ manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
 myManageHook = myManageHook' <+> manageScratchPad
 scratchPad = scratchpadSpawnActionTerminal "urxvt"
 
+-- Projects
+projects :: [Project]
+projects =
+    [ Project   { projectName       = "9"
+                , projectDirectory  = "~/"
+                , projectStartHook  = Just $ do spawn "urxvt"
+                                                spawn "urxvt -e htop"
+                }
+    ]
 
 ------------------------------------------------------------------------
 -- Layouts
@@ -268,6 +278,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask, xK_period),
      sendMessage (IncMasterN (-1)))
 
+  , ((modMask, xK_g),
+     switchProjectPrompt def)
+
+  , ((modMask .|. shiftMask, xK_g),
+     shiftToProjectPrompt def)
+
   -- Toggle the status bar gap.
   -- TODO: update this binding with avoidStruts, ((modMask, xK_b),
 
@@ -366,7 +382,7 @@ myStartupHook = return ()
 --
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
-  xmonad $ defaults {
+  xmonad $ dynamicProjects projects $ defaults {
       logHook = dynamicLogWithPP $ xmobarPP {
             ppOutput = hPutStrLn xmproc
           , ppTitle = xmobarColor xmobarTitleColor "" . shorten 50
