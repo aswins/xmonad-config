@@ -19,12 +19,12 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.Spacing
+import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import Graphics.X11.ExtraTypes.XF86
-import XMonad.Util.Scratchpad
 import XMonad.Hooks.EwmhDesktops
 import qualified XMonad.Hooks.EwmhDesktops as F
 
@@ -65,6 +65,21 @@ toggleDisplay = "bash /home/aswin/bin/toggle_display.sh"
 --
 myWorkspaces = ["1:term","2:web","3:chat","4:ide","5:doc"] ++ map show [6..9]
 
+scratchpads = [
+    NS "htop" "urxvt -e htop" (title =? "htop") defaultFloating ,
+
+    NS "stardict" "stardict" (className =? "Stardict")
+        (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)) ,
+
+    NS "popUpShell" "urxvt -name popUpShell" (resource =? "popUpShell")
+        (customFloating $ W.RationalRect l t w h),
+
+    NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") defaultFloating
+    ] where role = stringProperty "WM_WINDOW_ROLE"
+            h = 0.3     -- terminal height, 30%
+            w = 1       -- terminal width, 100%
+            t = 1 - h   -- distance from top edge, 70%
+            l = 1 - w   -- distance from left edge, 0%
 
 ------------------------------------------------------------------------
 -- Window rules
@@ -98,16 +113,8 @@ myManageHook' = composeAll
     , className =? "stalonetray"    --> doIgnore
     ,isFullscreen                   --> doFullFloat]
 
-manageScratchPad :: ManageHook
-manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
-  where
-    h = 0.3     -- terminal height, 30%
-    w = 1       -- terminal width, 100%
-    t = 1 - h   -- distance from top edge, 70%
-    l = 1 - w   -- distance from left edge, 0%
-
-myManageHook = myManageHook' <+> manageScratchPad
-scratchPad = scratchpadSpawnActionTerminal "urxvt"
+myNamedScratchpadManageHook = namedScratchpadManageHook scratchpads
+myManageHook = myManageHook' <+> myNamedScratchpadManageHook
 
 -- Projects
 projects :: [Project]
@@ -312,7 +319,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- scratchpad
   , ((modMask .|. shiftMask, xK_n),
-     scratchPad)
+     namedScratchpadAction scratchpads "popUpShell")
+
+  , ((modMask .|. controlMask .|. shiftMask, xK_t), namedScratchpadAction scratchpads "htop")
+  , ((modMask .|. controlMask .|. shiftMask, xK_s), namedScratchpadAction scratchpads "stardict")
+  , ((modMask .|. controlMask .|. shiftMask, xK_n), namedScratchpadAction scratchpads "notes")
 
   -- Toggle display in thinkpad
   , ((modMask .|. shiftMask, xK_d),
