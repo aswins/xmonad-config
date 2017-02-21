@@ -77,6 +77,10 @@ scratchpads = [
     NS "popUpShell" "urxvt -name popUpShell" (resource =? "popUpShell")
         (customFloating $ W.RationalRect l t w h),
 
+    NS "trello" "google-chrome-stable --app='https://trello.com/b/XG4Idcjh/schedule-service'"
+        (resource =? "trello.com__b_XG4Idcjh_schedule-service")
+        (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)) ,
+
     NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") defaultFloating
     ] where role = stringProperty "WM_WINDOW_ROLE"
             h = 0.3     -- terminal height, 30%
@@ -99,8 +103,8 @@ scratchpads = [
 -- 'className' and 'resource' are used below.
 --
 myManageHook' = composeAll
-    [ className =? "Google-chrome"  --> doShift "2:web"
-    , className =? "google-chrome"  --> doShift "2:web"
+    [ resource =? "Google-chrome"  --> doShift "2:web"
+    , resource  =? "google-chrome"  --> doShift "2:web"
     , className =? "Slack"          --> doShift "3:chat"
     , resource  =? "desktop_window" --> doIgnore
     , className =? "Galculator"     --> doFloat
@@ -326,6 +330,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask, xK_a),
      namedScratchpadAction scratchpads "ncmpcpp")
+
+  , ((modMask .|. shiftMask , xK_t),
+     namedScratchpadAction scratchpads "trello")
 
   , ((modMask .|. controlMask .|. shiftMask, xK_t), namedScratchpadAction scratchpads "htop")
   , ((modMask .|. controlMask .|. shiftMask, xK_s), namedScratchpadAction scratchpads "stardict")
