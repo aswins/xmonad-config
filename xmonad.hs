@@ -68,6 +68,9 @@ myWorkspaces = ["1:term","2:web","3:chat","4:ide","5:doc"] ++ map show [6..9]
 scratchpads = [
     NS "htop" "urxvt -e htop" (title =? "htop") defaultFloating ,
 
+    NS "ncmpcpp" "urxvt -e ncmpcpp" (title =? "ncmpcpp")
+        (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)) ,
+
     NS "stardict" "stardict" (className =? "Stardict")
         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)) ,
 
@@ -197,7 +200,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
      spawn "scrot -s")
 
   -- Mute volume.
-  , ((modMask .|. controlMask, xK_m),
+  , ((0, xF86XK_AudioMute),
      spawn "pamixer -t")
 
   -- Decrease volume.
@@ -320,6 +323,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- scratchpad
   , ((modMask .|. shiftMask, xK_n),
      namedScratchpadAction scratchpads "popUpShell")
+
+  , ((modMask, xK_a),
+     namedScratchpadAction scratchpads "ncmpcpp")
 
   , ((modMask .|. controlMask .|. shiftMask, xK_t), namedScratchpadAction scratchpads "htop")
   , ((modMask .|. controlMask .|. shiftMask, xK_s), namedScratchpadAction scratchpads "stardict")
