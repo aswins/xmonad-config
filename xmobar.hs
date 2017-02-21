@@ -35,7 +35,7 @@ Config {
             , "-i"  , "<fn=1>\xf1e6</fn> <left>%"
             , "--off-icon-pattern", "<fn=1>\xf1e6</fn>"
             , "--on-icon-pattern", "<fn=1>\xf1e6</fn>"
-            ] 1000,
+            ] 600,
         Run Memory ["-t","<icon=/home/aswin/.xmonad/icons/mem.xbm/> <usedratio>",
             "-p", "2",
             "-H","4096",
