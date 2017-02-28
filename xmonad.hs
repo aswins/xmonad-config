@@ -81,6 +81,10 @@ scratchpads = [
         (resource =? "trello.com__b_XG4Idcjh_schedule-service")
         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)) ,
 
+    NS "gaana" "google-chrome-stable --app='https://gaana.com'"
+        (resource =? "gaana.com")
+        (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)) ,
+
     NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") defaultFloating
     ] where role = stringProperty "WM_WINDOW_ROLE"
             h = 0.3     -- terminal height, 30%
@@ -299,11 +303,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask, xK_period),
      sendMessage (IncMasterN (-1)))
 
-  , ((modMask, xK_g),
-     switchProjectPrompt def)
-
   , ((modMask .|. shiftMask, xK_g),
-     shiftToProjectPrompt def)
+     switchProjectPrompt def)
 
   -- Toggle the status bar gap.
   -- TODO: update this binding with avoidStruts, ((modMask, xK_b),
@@ -333,6 +334,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask .|. shiftMask , xK_t),
      namedScratchpadAction scratchpads "trello")
+
+  , ((modMask, xK_g),
+     namedScratchpadAction scratchpads "gaana")
 
   , ((modMask .|. controlMask .|. shiftMask, xK_t), namedScratchpadAction scratchpads "htop")
   , ((modMask .|. controlMask .|. shiftMask, xK_s), namedScratchpadAction scratchpads "stardict")
