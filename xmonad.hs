@@ -28,6 +28,9 @@ import Graphics.X11.ExtraTypes.XF86
 import XMonad.Hooks.EwmhDesktops
 import qualified XMonad.Hooks.EwmhDesktops as F
 
+import XMonad.Prompt
+import XMonad.Prompt.Ssh
+
 toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
                 [] -> windows copyToAll
                 _ -> killAllOtherCopies
@@ -193,6 +196,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- Lock the screen using command specified by myScreensaver.
   , ((modMask .|. controlMask, xK_l),
      spawn myScreensaver)
+
+  , ((modMask, xK_s),
+     sshPrompt def)
 
   -- Spawn the launcher using command specified by myLauncher.
   -- Use this to launch programs without a key binding.
