@@ -84,9 +84,13 @@ scratchpads = [
         (resource =? "trello.com__b_XG4Idcjh_schedule-service")
         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)) ,
 
-    NS "gaana" "google-chrome-stable --app='https://gaana.com'"
-        (resource =? "gaana.com")
+    NS "gaana" "google-chrome-stable --app='https://play.google.com/music/listen?authuser=0&u=0'"
+        (resource =? "play.google.com__music_listen")
         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)) ,
+
+    NS "keep" "google-chrome-stable --app='https://keep.google.com'"
+        (resource =? "keep.google.com")
+        (customFloating $ W.RationalRect (2/6) (2/6) (1/3) (2/3)) ,
 
     NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") defaultFloating
     ] where role = stringProperty "WM_WINDOW_ROLE"
@@ -133,7 +137,7 @@ myManageHook = myManageHook' <+> myNamedScratchpadManageHook
 -- Projects
 projects :: [Project]
 projects =
-    [ Project   { projectName       = "9"
+    [ Project   { projectName       = "htop"
                 , projectDirectory  = "~/"
                 , projectStartHook  = Just $ do spawn "urxvt"
                                                 spawn "urxvt -e htop"
@@ -258,7 +262,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
      setLayout $ XMonad.layoutHook conf)
 
   -- Resize viewed windows to the correct size.
-  , ((modMask, xK_n),
+  , ((modMask .|. shiftMask , xK_r),
      refresh)
 
   -- Move focus to the next window.
@@ -343,6 +347,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask, xK_g),
      namedScratchpadAction scratchpads "gaana")
+
+  , ((modMask, xK_n),
+     namedScratchpadAction scratchpads "keep")
 
   , ((modMask .|. controlMask .|. shiftMask, xK_t), namedScratchpadAction scratchpads "htop")
   , ((modMask .|. controlMask .|. shiftMask, xK_s), namedScratchpadAction scratchpads "stardict")
